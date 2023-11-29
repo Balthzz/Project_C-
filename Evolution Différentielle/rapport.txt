@@ -1,0 +1,199 @@
+								*****Rapport du Laboratoire n°1 de GPA434*****
+
+						Réalisé par Balthazar Supiot, Timothée Leclaire-Fournier et Pacôme Gasnier
+
+												Fini le 11/06/2023
+
+I- Fonctionnalité :
+	
+	a) Algorithme de l’évolution différentielle : Nous avons réussi à produire adéquatement l'algorithme de l'évolution différentielle. 
+
+	b) Problèmes donnés : 
+		
+		1- Problème de la boîte ouverte
+			
+			i. Modélisation : 
+				1. Il y a 1 dimension.
+				2. Définition des dimensions (domaine et unité si besoin) : 
+				La dimension correspond à la longeur du carré à découper, la solution doit être comprise entre 0 à 50 exclus (largeur de la feuille).
+					
+				3. Y a-t-il des contraintes à même la formulation du problème?
+					 Il faut que la variable soit plus petite que le plus petit
+					 côté de la feuille.
+				4. Fonction objective : 
+					double objectiveFuncBox(DESolution const& sol)
+						{
+							if (sol[0] < 0 || sol[0] > 50)
+								return 0.0;
+							return (100 - (2.0 * sol[0])) *
+								(50 - (2.0 * sol[0])) * sol[0];
+						}
+				5. Fonction de « fitness » :
+				double fitnessFuncBox(double score)
+					{
+						return score;
+					}
+		
+			ii. Implémentation de la solution :
+				1. Avez-vous terminé son implémentation?
+					Oui
+				2. Convergent-elle vers une solution viable?;
+					Oui
+				3. Résultat obtenu par une simulation avec les valeurs par défaut : 
+					La longeur du carré qu'il faudrait couper pour avoir le plus grand volume serait: 10.566243
+				
+		
+		2. Optima de la fonction « peak »
+			
+			i. Modélisation : 
+				1.La courbe peaks est en 2 dimensions : x,y
+				2. Pour chaque dimension, expliquer ce qu’elle représente, son domaine et son unité (s’il existe).
+					x : longueur, doit être compris entre -3 et 3 inclus
+					y : hauteur, doit être compris entre -3 et 3 inclus
+
+				3. Y a-t-il des contraintes à même la formulation du problème?
+					Il faut respecter les intervalles de dimensions.
+				4. Fonction objective : 
+
+				double objectiveFuncPeaks(DESolution const& sol) {
+
+					double firstPart = 3.0 * pow(1.0 - sol[0], 2.0)
+						* pow(epsilon, -(pow(sol[0], 2.0) + pow(sol[1] + 1.0, 2.0)));
+					double middlestartPart = 10.0 * ((sol[0] / 5.0) - pow(sol[0], 3.0) - pow(sol[1], 5.0));
+					double middleendPart = pow(epsilon, -(pow(sol[0], 2.0) + pow(sol[1], 2.0)));
+					double endPart = (1.0 / 3.0) * pow(epsilon, -(pow(sol[1] + 1, 2) + pow(sol[1], 2)));
+					return firstPart - (middlestartPart * middleendPart) - endPart;
+				}
+
+				5. Fonction de « fitness » : 
+				Pour ce problème nous avons créé deux fonction fitness pour trouver le maximum et le minimum
+				
+				double fitnessFuncPeaksMax(double score)
+					{
+						return score;
+					}
+
+					double fitnessFuncPeaksMin(double score)
+					{
+						return -score;
+					}
+		
+			ii. Implémentation de la solution :
+				1. Avez-vous terminé son implémentation? 
+					Oui
+				2. Convergent-elle vers une solution viable? 
+					Oui
+				3. Résultat obtenu par une simulation qui utilise les valeurs par défaut : 
+					Les coordonnees du minimum sont: x(0.229360), y(-1.623467)
+					Les coordonnees du maximum sont: x(-0.010600), y(1.580353)
+		
+		3. Optimisation de la production pour une entreprise manufacturière
+			
+			i. Modélisation : 
+				1. Quel est le nombre de dimensions?
+				Les dimensions de chaque scénario corresponds à n et sera défini tel que : X1,X2,...,Xn.
+				Scénario 1 : 1 dimension.
+				Scénario 2 : 2 dimensions.
+				Scénario 3 : 4 dimensions.
+				2. Pour chaque dimension, expliquer ce qu’elle représente, son domaine et son unité (s’il existe).
+					Chaque dimensions reprensente la quantité de produits Pi à produire et leur unité correspond aux nombre unitaire de produits 
+					fabriqués.
+					Chacune d'elle doit donc être supérieur ou  égal à 0 et être un nombre entier.
+
+					Scénario 1 : Quantité de pains délicieux à produire.
+					Scénario 2 : X1, quantité d'applications mobiles à produire ; X2, quantité de logiciel de bureau à produire.
+					Scénario 3 :X1, quantité de table à produire ; 
+								X2, quantité de chaise de bureau à produire ; 
+								X1, quantité de commode à produire ; 
+								X2, quantité d'étagère de bureau à produire ; 
+
+				3. Y a-t-il des contraintes à même la formulation du problème?
+					Il faut que les réponses soit plus grandes ou égales à 0 et qu'elles soient un
+					nombre entier.
+				4. Fonction objective : 
+					Pour le scénario 1 : 
+						double objectiveFuncFactory1(DESolution const& sol)
+						{
+							return (std::round(sol[0]) * 0.5 <= factory1TotalRessources
+								&& std::round(sol[0]) > 0.0)
+								? std::round(sol[0]) * 2.0 : 0.0;
+						}
+
+					Pour le scénario 2 :
+						double objectiveFuncFactory2(DESolution const& sol)
+						{
+							if (sol[0] < 0.0 || sol[1] < 0.0) {
+								return -(std::fabs(sol[0]) + std::fabs(sol[1]));
+							}
+
+							double score = std::round(sol[0]) * 200.0 + std::round(sol[1]) * 400.0;
+							double gains = std::min(std::round(sol[0]), std::floor(factory2TotalRessources / 4.0)) * 950.0
+								+ std::min(std::round(sol[1]), std::floor(factory2TotalRessources / 2.0)) * 2000.0;
+
+							if (score <= factory2TotalRessources)
+								return gains;
+							else
+								return (factory2TotalRessources / (score * 10.0e3)) * gains;
+						}
+
+					Pour le scénario 3 :
+						double objectiveFuncFactory3(DESolution const& sol)
+						{
+							if (sol[0] < 0.0 || sol[1] < 0.0 || sol[2] < 0.0 || sol[3] < 0.0) {
+								return -(std::fabs(sol[0]) + std::fabs(sol[1]) + std::fabs(sol[2]) + std::fabs(sol[3]));
+							}
+
+							double score = std::round(sol[0]) * 4.0 + std::round(sol[1]) * 2.0
+								+ std::round(sol[2]) * 6.0 + std::round(sol[3]) * 5.0;
+							double gains = std::min(std::round(sol[0]), std::floor(factory3TotalRessources / 4.0)) * 100.0
+								+ std::min(std::round(sol[1]), std::floor(factory3TotalRessources / 2.0)) * 60.0
+								+ std::min(std::round(sol[2]), std::floor(factory3TotalRessources / 6.0)) * 160.0
+								+ std::min(std::round(sol[3]), std::floor(factory3TotalRessources / 5.0)) * 120.0;
+
+							if (score <= factory3TotalRessources)
+								return gains;
+							else {
+								return (factory3TotalRessources / (score * 10.0e3)) * gains;
+							}
+						}
+				5. Fonction de « fitness » :
+				double fitnessFuncFactory(double score)
+					{
+						return score;
+					}
+		
+			ii. Implémentation de la solution :
+				1. Avez-vous terminé son implémentation? 
+					Oui
+				2. Convergent-elle vers une solution viable?; 
+					Oui
+				3. Résultats obtenu par une simulation qui utilise les valeurs par défaut : 
+			
+					Solution optimale du scénario 3:
+						i0: 0.000000
+						i1: 100.000000
+						i2: 0.000000
+						i3: 0.000000
+
+
+II- Discussions :
+	
+	a) Le paradigme de l’orienté objet permet de résoudre tout type de problèmes d'optimisation avec des variables différentes 
+		ainsi qu'un algorithme (en insérant la fonction fitness et objective). De plus, il permet la résolution de problèmes plus complexe 
+		à l'opposé d'une approche conventionnelle qui ne permet pas de résoudre des problèmes complexe et qui demande une approche différentes.
+
+		Le gros avantage de ce paradigme se définit clairement par la réutilisation de code. Il serait très facile d'ajouter de nouveaux problèmes
+		en utilisant le moteur d'évolution différentielle.
+	
+	b) Serait-il possible d’améliorer la modularité de ce projet? Comment?
+		Je crois que la création d'une librairie de contrôle d'interface texte avec l'utilisateur serait excellant pour simplifier la création de nouvelles 
+		applications. Par exemple, nous avons développé une alternative de la fonction _getchar() pour Linux pour un "port" futur. Il serait intéressant d'extraire
+		ces fonctions dans une librairie générale afin de ne pas répéter le même travail.
+	
+
+
+III- Avez-vous des commentaires constructifs à faire sur ce projet (coquilles et suggestions).
+
+	Nous avons remarqué une coquille dans ce projet. Les problèmes de la boîte ouverte et des usines requièrent la paramètrisation de variables, 
+	alors qu'il est impossible de faire cela avec uniquement des pointeurs de fonctions simples (tel qu'en C). Pour cela, il a fallu ajuster la difficulté 
+	des problèmes. Nous avons notifié cela à notre professeur et une modification du sujet à été apporté.
