@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/GPA434Lab2DEApp">
+        <file alias="AppIcon">resources/dna-icon.png</file>
+        <file alias="point">resources/point.obj</file>
+    </qresource>
+</RCC>

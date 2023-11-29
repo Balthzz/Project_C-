@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>qml;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>qrc;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Translation Files">
+      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
+      <Extensions>ts</Extensions>
+    </Filter>
+    <Filter Include="Header Files\DEWidgets">
+      <UniqueIdentifier>{6f9473dc-2b01-4f64-abc4-adc9cf03e249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DEWidgets">
+      <UniqueIdentifier>{64a8cdef-3842-4dd1-ba2b-5d55d8fd4ddc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="GPA434Lab2DEApp.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtMoc Include="GPA434Lab2DEApp.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <ClCompile Include="GPA434Lab2DEApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="delibBasicDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEBestResult.cpp">
+      <Filter>Source Files\DEWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEController.cpp">
+      <Filter>Source Files\DEWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEEngineParameters.cpp">
+      <Filter>Source Files\DEWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEHistoryChart.cpp">
+      <Filter>Source Files\DEWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEOpenBoxSolution.cpp">
+      <Filter>Source Files\DEWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEPeakSolution.cpp">
+      <Filter>Source Files\DEWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="QDESolutionPanel.cpp">
+      <Filter>Source Files\DEWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="QDESolutionTab.cpp">
+      <Filter>Source Files\DEWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEAdapter.cpp">
+      <Filter>Source Files\DEWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="QDEPcbSpaceOptimizer.cpp">
+      <Filter>Source Files\DEWidgets</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QDEAdapter.h">
+      <Filter>Header Files\DEWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEBestResult.h">
+      <Filter>Header Files\DEWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEController.h">
+      <Filter>Header Files\DEWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEHistoryChart.h">
+      <Filter>Header Files\DEWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEEngineParameters.h">
+      <Filter>Header Files\DEWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEOpenBoxSolution.h">
+      <Filter>Header Files\DEWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEPeakSolution.h">
+      <Filter>Header Files\DEWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="QDESolutionPanel.h">
+      <Filter>Header Files\DEWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="QDESolutionTab.h">
+      <Filter>Header Files\DEWidgets</Filter>
+    </QtMoc>
+    <QtMoc Include="QDEPcbSpaceOptimizer.h">
+      <Filter>Header Files\DEWidgets</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="GPA434Lab2Rapport.txt" />
+  </ItemGroup>
+</Project>

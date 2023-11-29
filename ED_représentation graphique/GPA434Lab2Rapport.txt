@@ -1,0 +1,111 @@
+1. Donnez les noms de tous les étudiants impliqués dans le projet.
+Timothée Leclaire-Fournier
+Balthazar Supiot
+Pacôme Etxezaharreta
+
+2. Implémentation de l’application générale :
+a. Avez-vous réussi à produire adéquatement l’implémentation de l’interface
+graphique de base en incluant les solutions peak et openbox?
+Oui, toutes les composantes ont bien été assemblées.
+
+b. S’il y a des parties incomplètes ou non fonctionnelles, quelles sont-elles?
+Grâce à un bogue visuel discuté avec le chargé de cours, il faut survoler le nom 
+de l'onglet montré et de faire rouler la molette de souris pour faire apparaître 
+toutes les différents onglets.
+
+3. Concernant votre solution, indiquez :
+a. Décrivez la problématique que vous adressez.
+Nous essayons d'optimiser l'espace sur un pcb en permettant l'algorithme d'évolution
+de faire appliquer une translation en x, y, une rotation et un agrandissement sur un
+polygone originale pour maximiser sa grosseur.
+
+b. Avez-vous terminé son implémentation? Si oui, donnez le nom de votre class
+héritant de de::SolutionStrategy.
+Oui (QDEPcbSpaceOptimizer::PcbStrategy).
+
+c. Avez-vous terminé son intégration dans l’application principale? Si oui, donnez
+le nom de votre classe héritant de QDESolutionPanel.
+Oui (QDEPcbSpaceOptimizer).
+
+d. Quels sont les paramètres ajustables disponibles permettant de définir la
+problématique?
+La quantité de polygones sur le pcb qu'il faut éviter.
+La forme du polygone à placer (triangle ou carré).
+
+e. Quelle est la rétroaction réalisée?
+Nous avons choisi de visualiser le pcb en dessinant tous les polygones.
+Les 10 meilleures solutions les plus récentes sont dessinées en gris alors
+que la plus récente est en rose.
+
+f. Est-ce que votre résultat converge vers une solution viable? Si oui, donnez le
+résultat obtenu par une simulation.
+Les résultats ne convergent pas nécessairement sur la meilleure solution. On peut toujours
+observer une convergence, mais une clarification de la fonction objective permettrait de bien
+pénaliser les mauvais polygones de façon linéaire pour permettre à ceux-ci d'évoluer vers
+une meilleure solution.
+
+g. Sur 10, combien donnez-vous à la réalisation de votre solution considérant
+chacun de ces critères :
+i. Pertinence de votre problématique où 0 est aucunement pertinent
+9
+
+ii. la pertinence des options présentées où 0 est aucunement pertinent
+8
+
+iii. la pertinence de la rétroaction où 0 est aucunement pertinent
+10
+
+iv. niveau de difficulté où 0 présente un niveau trivial
+7
+
+v. effort de la solution orientée objet où 0 n’indique aucun effort
+8
+
+vi. qualité de la réalisation en langage C++ où 10 indique un code d’excellente 
+qualité où sont présents tous les concepts vus en classe GPA434 | Laboratoire 1
+9
+
+4. Donnez une courte description expliquant l’objectif d’au moins 4 connexions faite dans
+le tableau de connexion signal->slot. Vous devez utiliser des émetteurs différents.
+
+i. connect(mDEParams, &QDEEngineParameters::parameterChanged,
+		this, &GPA434Lab2DEApp::changeSimulationParameters);
+Cette connexion permet d'appeler les fonctions nécessaires pour réinitialiser le
+QDEAdapter avec des nouveaux paramètres ainsi qu'un nouvel onglet de solution lors de
+modification de paramètres de l'algorithme.
+
+ii. connect(mSolutionTab, &QDESolutionTab::parameterChanged,
+		this, &GPA434Lab2DEApp::changeSimulationParameters);
+Cette représente le même contexte que la première fonction connect, mais elle
+intéragit avec les paramètres de l'évolution (dans notre cas, le polygone et le nombre
+d'obstacles) tel que la grandeur des côtés des boîtes.
+
+iii. connect(mDEController, &QDEController::evolutionRequired,
+		&mDE, &QDEAdapter::stepEvolution);
+Le signal QDEController::evolutionRequired représente le controller qui mentionne
+que qu'il faudrait avancer d'un pas l'évolution (que ce soit un pas, ou un timer qui 
+s'échoue pour l'avancement automatique). On le connecte à l'adapteur pour faire avancer
+l'algorithme au total d'un pas.
+
+iv. connect(&mDE, &QDEAdapter::stoppingCriteriaReached,
+		mDEController, &QDEController::endSimulation);
+Cette connexion permet d'arrêter la simulation lorsqu'un critère de fin est atteint.
+(Nombre d'évolution atteints, etc)
+
+
+5. Considérant la fonction GPA434Lab2DEApp::changeSimulationParameters,
+expliquez en vos mots ce que fait cette fonction, quelle est sa nécessité et pourquoi elle
+est déclarée en tant que slot.
+Cette fonction s'occupe de faire le lien entre le QDEAdapter avec les paramètres ainsi que
+les onglets des différents problèmes à chacune des modifications. Il faut donc la définir 
+dans une classe qui contient toutes ces variables.
+
+Il est bien entendu nécessaire de rendre cette fonction slot pour pouvoir la connecter
+avec les signaux parameterChanged de QDEEngineParameters et QDESolutionTab.
+
+6. Tous commentaires ou suggestions sur ce laboratoire (coquilles et suggestions).
+Nous avons bien apprécié ce laboratoire, mais nous croyons qu'avec une semaine de plus, 
+nous aurions la possibilité d'attaquer des problèmes de plus grandes envergures.
+
+Il serait peut-être bien d'avoir des idées de problèmes plus avancés dans lesquels 
+nous sommes plus encadrés. Cela permettrait de pousser la matière plus loin.
